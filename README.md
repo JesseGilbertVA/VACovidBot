@@ -1,0 +1,1 @@
+This is a Twitter bot that posts daily updates of the total number of the cases and deaths cause by the COVID-19 pandemic in the state of Virginia. It utilizes BeautifulSoup and Selenium to obtain the data. You can see it in action at https://twitter.com/VACovidBot

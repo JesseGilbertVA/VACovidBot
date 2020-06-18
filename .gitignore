@@ -1,0 +1,5 @@
+__pycache__/
+cdcscrape.py
+config.py
+geckodriver.exe
+geckodriver.log
