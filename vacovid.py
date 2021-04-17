@@ -25,15 +25,15 @@ driver = webdriver.Firefox(options=options)
 driver.get(url)
 
 # Actual scraping code. Getting case and death data then formatting it to be used in later functions.
-sortByState = driver.find_element_by_xpath('/html/body/div[4]/div[1]/div/div[5]/div[1]/div/table/thead/tr/th[1]')
+sortByState = driver.find_element_by_xpath('/html/body/div[4]/div[1]/div/div[5]/div[1]/div/table/thead/tr/th[2]')
 driver.execute_script("arguments[0].scrollIntoView();", sortByState)
 sortByState.click()
 soup = BeautifulSoup(driver.page_source, 'html.parser')
 tr = soup.findAll('tr')
 virginia = tr[48]
 data = virginia.findAll('td')
-rawCases = data[1]
-rawDeaths = data[3]
+rawCases = data[2]
+rawDeaths = data[4]
 getCases = rawCases.get_text()
 getDeaths = rawDeaths.get_text()
 stripCases = str(getCases).strip('\n').replace(',', '')
@@ -79,8 +79,8 @@ try:
         print('Cases and deaths are the same, closing script.')
         driver.quit()
     else: # If there are new cases, send tweet.
-        api.update_status('Virginia COVID-19 cases and deaths as of ' + today + ':\n\nCases: ' + cases + newCases + '\nDeaths: ' + deaths + newDeaths + '\n\n#COVID19 #Coronavirus #Pandemic')
-        #print('Virginia COVID-19 cases and deaths as of ' + today + ':\n\nCases: ' + cases + newCases + '\nDeaths: ' + deaths + newDeaths + '\n\n#COVID19 #Coronavirus #Pandemic')
+        api.update_status('Virginia COVID-19 cases and deaths as of ' + today + ':\n\nCases: ' + cases + newCases + '\nDeaths: ' + deaths + newDeaths + '\n\n#COVID19 #Coronavirus #Pandemic #Virginia')
+        print('Virginia COVID-19 cases and deaths as of ' + today + ':\n\nCases: ' + cases + newCases + '\nDeaths: ' + deaths + newDeaths + '\n\n#COVID19 #Coronavirus #Pandemic #Virginia')
         print('Tweet sent successfully.')
         writeFiles()
         time.sleep(10)
